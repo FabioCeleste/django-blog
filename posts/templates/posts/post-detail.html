@@ -1,0 +1,55 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <h1>{{post.title}}</h1>
+      </div>
+      <div class="col-sm">      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+   
+      <div class="col-sm">
+          {% for paragraph in text %}
+          <p class="para">{{paragraph}}</p>
+          {%endfor%}
+      </div>
+   
+    </div>
+  </div>
+
+
+  <div class="container img" style="margin: 150px auto 100px auto ; ">
+    <div class="row">
+      <div class="col-sm">
+          <img class="img-fluid" src="{{post.image.url}}" alt="">
+      </div>
+
+
+      <div class="container img">
+        <div class="row">
+          <div class="col-sm">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="{{post.author.image.image.url}}" style="width: 250px; height: 250px;" class="img-thumbnail">
+                </div>
+                <div class="col-sm">
+                  <h3>{{post.author.username}}</h3>
+                  <p>{{post.author.image.desc}}</p>
+                </div>
+                <div class="col-sm">
+                </div>
+              </div>
+            </div>
+          </div>
+
+  </div>
+
+{% endblock %}

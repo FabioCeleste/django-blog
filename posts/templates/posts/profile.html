@@ -1,0 +1,18 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img class="img-thumbnail" src="{{user.image.image.url}}" alt="">
+        </div>
+        <div class="col-sm">
+            <p>Nome: {{user.username}}</p>
+            <p>Descrição: {{user.image.desc}}</p>
+            <p><a href="{% url 'update' %}">atualizar dados</a></p>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+
+{% endblock %}
