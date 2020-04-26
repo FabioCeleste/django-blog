@@ -30,9 +30,45 @@ def new_post(request):
             return redirect('/')
 
     context = {
-        'form': form
+        'form': form,
+        'new': 'False'
     }
     return render(request, 'posts/newpost.html', context)
+
+@login_required(login_url='/login')
+def update_post(request, pk):
+    
+    form = PostForms()
+    post = Post.objects.get(id=pk)
+    if request.user.id == post.author.id:
+        if request.method == 'POST':
+            
+            form = PostForms(request.POST, request.FILES, instance = post)
+            if form.is_valid():
+                form.save()
+                return redirect('/profile')
+        context = {
+            'form': form,
+            'post': post,
+            
+        }
+        return render(request, 'posts/newpost.html', context)
+    else:
+        return redirect('/')
+
+def delete_post(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.user.id == post.author.id:
+        post.delete()
+        return redirect('/myposts')
+    else:
+        return render(request, 'posts/index.html')
+    
+
+@login_required(login_url='/login')
+def my_post(request):
+    posts = Post.objects.filter(author = request.user)
+    return render(request, 'posts/myposts.html', {'posts': posts})
 
 def post_detail(request, pk):
     post = Post.objects.get(id=pk)

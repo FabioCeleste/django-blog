@@ -5,23 +5,28 @@
     <div class="row">
         
         <div class="col-sm">
+            {%if new%}
             <form action="{% url 'new-post' %}" method="POST" enctype="multipart/form-data">
+            {% else %}
+            <form action="{% url 'post-update' post.id %}" method="POST" enctype="multipart/form-data">
+            {% endif %}
                 {% csrf_token %}
                 <input type="hidden" name="author" value="{{user}}">
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Titulo:</label>
-                    <input type="text" class="form-control" id="id_email"  aria-describedby="emailHelp" name="title">
+                    <input type="text" class="form-control" id="id_email" value="{{post.title}}"  aria-describedby="emailHelp" name="title">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Conteudo:</label>
-                    <textarea name="content" class="form-control" id="validationTextarea" rows="15" ></textarea> 
+                    <textarea name="content" class="form-control" id="validationTextarea" rows="15" >{{post.content}}</textarea> 
                 </div>    
                 <div class="form-group">
                     <label for="exampleInputEmail1">Imagem:</label>
-                    <input type="file" name="image" id="">
+                    <input type="file" name="image" value="{{user.image.image}}">
                 </div>               
                 <button type="submit" class="btn btn-dark btn-lg btn-block"  >Postar</button>
+            
 
             </form>
         </div>

@@ -1,0 +1,24 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% block content %}
+
+{% for post in posts %}
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+          <h1>{{post.title}}</h1>
+      </div>
+      <div class="col-sm">
+        <a href="/update/{{post.id}}">Atualizar</a>
+      </div>
+      <div class="col-sm">
+        <a href="/delete/{{post.id}}">Deletar</a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+
+
+
+{% endblock %}
